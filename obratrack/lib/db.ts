@@ -1,8 +1,3 @@
-bash
-
-cat /home/claude/obratrack2/lib/db.ts
-Saída
-
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL!);
 export default sql;
