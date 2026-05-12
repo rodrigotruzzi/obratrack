@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
 export async function GET() {
   try { return NextResponse.json(await sql`SELECT * FROM obras ORDER BY created_at DESC`); }
   catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }); }

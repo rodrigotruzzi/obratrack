@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
     const r = await sql`SELECT c.*,o.nome as obra_nome,f.nome as fornecedor_nome FROM contratacoes c LEFT JOIN obras o ON c.obra_id=o.id LEFT JOIN fornecedores f ON c.fornecedor_id=f.id ORDER BY c.created_at DESC`;
