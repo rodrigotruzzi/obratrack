@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
   try {
     const b = await req.json();
