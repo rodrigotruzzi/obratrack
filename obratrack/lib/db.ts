@@ -1,13 +1,18 @@
 import { neon } from '@neondatabase/serverless';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set');
+// Lazy initialization: não executa no momento do import (evita falha no build)
+function getDb() {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error('DATABASE_URL environment variable is not set');
+  }
+  return neon(url);
 }
 
-const sql = neon(process.env.DATABASE_URL);
-export default sql;
+export default getDb;
 
 export async function setupDatabase() {
+  const sql = getDb();
   try {
     await sql`
       CREATE TABLE IF NOT EXISTS obras (
